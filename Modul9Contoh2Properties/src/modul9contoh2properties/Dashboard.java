@@ -1,0 +1,43 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package modul9contoh2properties;
+
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.event.ActionEvent;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+/**
+ *
+ * @author Muhammad Rizky S
+ */
+public class Dashboard implements Initializable{
+    @FXML
+    private Label labelWelcome;
+    @FXML
+    private Button buttonLogout;
+    
+    @FXML
+    private void handleButtonLogoutAction(ActionEvent event) throws Exception {
+        Session.clearSession();
+        
+        Main main = new Main();
+        main.changeScene("Main.fxml");
+    }
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        String username = (String) Session.getAttribute("username");
+        String password = (String) Session.getAttribute("password");
+        String fullname = (String) Session.getAttribute("fullname");
+        String role = (String) Session.getAttribute("role");
+        
+        labelWelcome.setText("Selamat datang, " + fullname + " (" + role +") " + "\nSession Properties");
+    }
+}
